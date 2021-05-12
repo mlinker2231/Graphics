@@ -3,8 +3,46 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Graph {
+    static int difficulty = 0;
     public static void main(String[] args) {
-        JFrame window =new JFrame("Run");
+        JFrame diffSelect = new JFrame("Select Difficulty");
+        JButton buttonE = new JButton();
+        buttonE.setText("Easy");
+        JButton buttonH = new JButton();
+        buttonH.setText("Hard");
+        JButton buttonI = new JButton();
+        buttonI.setText("Impossible");
+        buttonE.setBounds(100, 100, 150, 50);
+        buttonH.setBounds(100, 150, 150, 50);
+        buttonI.setBounds(100, 200, 150, 50);
+        diffSelect.add(buttonE);
+        diffSelect.add(buttonH);
+        diffSelect.add(buttonI);
+        diffSelect.setSize(400, 400);
+        diffSelect.setLayout(null);
+        diffSelect.setVisible(true);
+        buttonE.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                diffSelect.setVisible(false);
+                start();
+            }
+        });
+        buttonH.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                difficulty = 1;
+                diffSelect.setVisible(false);
+                start();
+            }
+        });
+        buttonI.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                difficulty = 2;
+                diffSelect.setVisible(false);
+                start();
+            }
+        });
+
+
 //        window.setSize(640,540);
 //        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        window.setVisible(true);
@@ -25,7 +63,10 @@ public class Graph {
 //                bool[0] = !bool[0];
 //            }
 //        });
+    }
 
+    private static void start() {
+        JFrame window =new JFrame("Run");
         JButton[] b=new JButton[9];
         for (int x = 0; x < b.length; x++) {
             b[x] = new JButton();
@@ -124,11 +165,33 @@ public class Graph {
         window.setSize(400,400);
         window.setLayout(null);
         window.setVisible(true);
+
     }
+
     public static void changeColor(JButton b) {
-        if (b.getBackground().equals(Color.red))
-            b.setBackground(Color.blue);
-        else
-            b.setBackground(Color.red);
+        if (difficulty == 0) {
+            if (b.getBackground().equals(Color.red))
+                b.setBackground(Color.blue);
+            else
+                b.setBackground(Color.red);
+        }else if (difficulty == 1){
+            if (b.getBackground().equals(Color.red))
+                b.setBackground(Color.blue);
+            else if (b.getBackground().equals(Color.blue))
+                b.setBackground(Color.green);
+            else
+                b.setBackground(Color.red);
+        }else {
+            if (b.getBackground().equals(Color.black))
+                b.setBackground(Color.darkGray);
+            else if (b.getBackground().equals(Color.darkGray))
+                b.setBackground(Color.gray);
+            else if (b.getBackground().equals(Color.gray))
+                b.setBackground(Color.lightGray);
+            else if (b.getBackground().equals(Color.lightGray))
+                b.setBackground(Color.white);
+            else
+                b.setBackground(Color.black);
+        }
     }
 }
